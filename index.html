@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang ="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>dépenses énergétiques au quotidien</title>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="styles.css">
+<script src=”https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.min.js”></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> 
+
+
+</head>
+<body class = "container pt-5"> <!-- corps de page -->
+	
+	<header class = "zone_titre text-center"> <!-- zone 1: en tête;titre et bannière image -->
+		<h1 class="">ÉVALUEZ VOS DÉPENSES ÉNERGETIQUES</h1><h4>NOTRE OUTIL DE CALCUL EN LIGNE</h4>	
+	</header>
+	<div id="jstext">
+		<div class="container fond1 p-4 vert-clair fs-5">	
+			<div class = "row mt-5"> 
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 ">
+					<label for="Activités physiques" class="required gras fs-5 mb-2">Activités physiques :</label> 
+					<select id="Activités physiques" class="form-select gray contour form-select-md mb-3" name="Activités physiques" content-type="choices" trigger="true" target="choix"> 
+						<option value="1">Cyclisme</option>
+						<option value="2">Jeu vidéo réclamant une activité </option>  
+						<option value="3">Vélo d'appartement</option>
+						<option value="4">Gymnastique suédoise</option>
+						<option value="5">Exercice physique</option>
+						<option value="6">Rame</option>
+						<option value="7">Exercices de gymnastique en vidéo:</option>
+						<option value="8">Yoga</option> 
+						<option value="9">Step</option> 
+						<option value="10">Danse</option>
+						<option value="11">Activités domestitiques</option>
+						<option value="12">S'occuper d'enfants (habiller, baigner, préparer, nourrir)</option>
+						<option value="13">Marcher/courir, jouer avec un/des enfant(s)</option>
+						<option value="14">Réparations domestiques</option> 
+						<option value="15">Inactivité, repos/effort léger</option> 
+						<option value="16">Pelouse et jardin </option> 
+						<option value="19">Jouer un instrument de musique</option> 
+						<option value="17">Divers </option> 
+						<option value="18">Activités artistiques (peinture, sculpture, tissage...)</option> 
+						<option value="20">Activités réalisées dans le cadre du travail</option> 
+						<option value="21">Course </option> 
+						<option value="22">Sports </option> 
+						<option value="24">Escalade</option> 
+						<option value="25">Corde à sauter</option> 
+						<option value="23">Equitation</option> 
+						<option value="26">Roller, patin</option> 
+						<option value="27">Transport </option> 
+						<option value="28">Marche (loisir, pour se déplacer...) </option> 
+						<option value="30">Activités nautiques et aquatiques </option> 
+						<option value="29">Faire une randonnée </option>
+						<option value="31">Natation</option>
+						<option value="32">Activités hivernales</option>
+					</select> 
+				</div> 
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6"> 
+					<label for="pet-select" class="required gras fs-5 mb-2">Précisez l'activité :</label> 
+					<select name="pets" id="choix" class="form-select contour gray form-select-md mb-3" onchange="getChoix()"  > 
+						<optgroup reference="1" label="Cyclisme:">
+							<option value="6.8">pour aller/revenir du travail, à son rythme</option> 
+							<option value="8.5">en montagne</option>
+							<option value="3.5">loisir, 9km/h</option>
+							<option value="5.8">loisir, 15km/h</option> 
+							<option value="6.8">loisir, 16-19.2km/h, rythme lent, effort léger</option>
+							<option value="5.8">loisir, 19.3-22.4km/h,effort modéré</option>
+							<option value="10.0">loisir, 22.5-25km/h,effort vigoureux</option>  
+						</optgroup>
+						<optgroup reference="2" label="Jeu vidéo réclamant:"> 
+							<option value="2.3">un effort léger (ex. Wii Fit, en position d’équilibre, yoga)</option> 
+							<option value="3.8">un effort modéré (ex. Wii Fit, aérobic, résistance)</option> 
+							<option value="7.2">un effort vigoureux (ex. Exergaming, Dance Dance Revolution)</option> 
+		
+						</optgroup>  
+						<optgroup reference="3" label="Vélo d'appartement :"> 
+							<option value="3.5">30-50 watts, effort très léger à léger</option>
+							<option value="4.8">51-89 watts, effort léger à modéré</option> 
+							<option value="6.8">90-100 watts, effort modéré à vigoureux</option> 
+							<option value="8.8">101-160 watts, effort assez vigoureux</option> 
+							<option value="11.0">161-200 watts, effort vigoureux</option>
+							<option value="14.0">201-270 watts, effort très vigoureux</option> 
+						</optgroup> 
+						<optgroup reference="4" label="Gymnastique suédoise :"> 
+							<option value="8.0"> effort léger (ex. redressements assis, abdominaux...)</option> 
+							<option value="3.8">effort modéré (ex. pompes, abdominaux, tractions, sauts en écart)...</option> 
+							<option value="3.5"> effort vigoureux (ex. pompes, abdominaux, tractions, sauts en écart)</option> 
+					 
+						</optgroup>
+						<optgroup reference="5" label="Exercice physique :"> 
+							<option value="8.0">entraînement en circuit, avec des haltères, effort vigoureux</option> 
+							<option value="5.0">machine elliptique, effort modéré</option> 
+							<option value="5.0">entraînement en résistance (à une masse), squats, effort lent ou explosif</option>
+							<option value="3.5">entraînement en résistance (à une masse), exercices multiples à des résistances variées</option>
+							<option value="5.0">exercice de club de remise en forme, gym/musculation en une même séance</option>
+							<option value="3.8">exercice à la maison</option>
+							<option value="2.3">stretching doux</option>
+							<option value="3">pilates</option>
+							<option value="6.8">cours d’exercices (par ex. aérobic, aquagym)</option>
+							<option value="2.8">exercices avec un ballon</option>
+							<option value="5.3">aérobic aquatique, exercices dans l’eau</option>
+						</optgroup>
+						<optgroup reference="6" label="Rame :">
+							<option value="4.8">100 watts, effort modéré</option>
+							<option value="8.5">150 watts, effort vigoureux</option>
+							<option value="12.0">200 watts, effort très vigoureux</option>  
+						</optgroup>
+						<optgroup reference="7" label="Exercices de gymnastique en vidéo :"> 
+							<option value="2.3">effort léger (ex. yoga, stretching)</option> 
+							<option value="4.0">effort modéré (ex. entraînement cardio-pulmonaire)</option> 
+							<option value="6.0">effort vigoureux (ex. entraînement cardio-pulmonaire)</option>
+						</optgroup>
+						<optgroup reference="8" label="Yoga :"> 
+							<option value="2.5">Hatha</option> 
+							<option value="4.0">Power</option>
+							<option value="2.0">Nadisodhana</option>
+							<option value="3.3">Surya Namaskar</option>
+						</optgroup>
+						<optgroup reference="9" label="Step :"> 
+							<option value="5.5">avec un step de 10 cm</option>
+							<option value="7.5">avec un step de 15-20 cm</option>
+						</optgroup>
+						<optgroup reference="10" label="Danse :"> 
+							<option value="5.0">aérobic, faible impact</option> 
+							<option value="7.3">aérobic, fort impact</option> 
+							<option value="4.5">danse ethnique ou culturelle(grecque, hula, salsa, merengue, flamenco...)</option>
+							<option value="3.5">danse caribéenne</option>
+					
+						</optgroup>
+						<optgroup reference="11" label="Activités domestiques :"> 
+							<option value="3.3">nettoyage, balayage de la moquette ou des sols</option> 
+							<option value="3.5">nettoyage, important ou majeur</option> 
+							<option value="3.5">nettoyage, lavage, debout, effort modéré</option>
+							<option value="3.2">nettoyage des fenêtres, lavage des fenêtres</option>
+							<option value="2.5">lavage, debout, effort léger</option>
+							<option value="2.3">époussetage ou cirage des meubles</option>
+							<option value="3.3">cuisiner, laver la vaisselle, nettoyer, effort modéré</option>
+							<option value="2.5">rangement, changement des draps, sortie ses poubelles, effort léger</option>
+							<option value="1.8">vaisselle, debout</option>
+							<option value="2.5">débarras des plats de la table,effort léger</option>
+							<option value="3.3">passage d'aspirateur, effort modéré</option>
+							<option value="2.0">cuisine ou préparation de repas en utilisant des appareils manuels</option>
+							<option value="2.5">service d'aliments, mise sur table</option>
+							<option value="2.0">cuisine ou préparation de repas en marchant</option>
+							<option value="2.5">nourrir des animaux domestiques</option>
+							<option value="2.5">port/rangement des provisions, courses sans chariot, port de paquets</option>
+							<option value="7.5">port des provisions en montant des escaliers</option>
+							<option value="2.3">courses avec ou sans chariot, debout ou en marchant</option>
+							<option value="1.8">repassage</option>
+							<option value="1.3">tricotage, couture, emballage de cadeaux, en position assise</option>
+							<option value="2.8">couture à la machine</option>
+							<option value="2.0">lessive(à la machine ou à la main), mise des vêtements au lave-linge/sèche-linge, faire une valise</option>
+							<option value="2.3">rangement/rassemblement des vêtements pour les ranger, impliquant de marcher</option>
+							<option value="3.3">faire le lit, changement les draps</option>
+							<option value="5.8">déplacement des meubles, des objets, port des cartons</option>
+							<option value="4.8">rangement d'une pièce</option>
+							<option value="3.5">nettoyage à la brosse des sols,une salle de bain, une baignoire, à genoux, effort modéré</option>
+							<option value="2.0">nettoyage à la brosse des sols,une salle de bain, une baignoire, à genoux, effort léger</option>
+							<option value="3.5">emballeage/déballage des cartons,charger ou décharger des objets dans la voiture</option>
+							<option value="2.5">arrosage des plantes</option>
+							<option value="9.0">port des objets dans des escaliers</option>
+							<option value="2.5">jouer avec des animaux, en position assise</option>
+							<option value="2.8">jouer avec des animaux, debout</option>
+							<option value="4.0">marche/course, jouer avec des animaux </option>
+							<option value="2.3">s’occuper des animaux</option>
+					
+						</optgroup>
+						<optgroup reference="12" label="S'occuper d'enfants (habiller, baigner, préparer, nourrir) :"> 
+							<option value="2.0">En position assise</option> 
+							<option value="3.0">En position debout</option> 
+						</optgroup>
+						<optgroup reference="13" label="Marcher/courir, jouer avec un/des enfant(s) :"> 
+							<option value="3.5">effort modéré</option> 
+							<option value="5.8">effort vigoureux</option> 
+						</optgroup>
+						<optgroup reference="14" label="Réparations domestiques :"> 
+							<option value="4.5">poser ou retirer de la moquette</option> 
+							<option value="3.8">poser du carrelage ou du linoléum</option>
+							
+							<option value="4.5">peindre</option>  
+						</optgroup>
+						<optgroup reference="15" label="Inactivité, repos/effort léger :"> 
+							<option value="1.3">écouter de la musique, lecture, écriture, téléphone, en position allongée, télévision</option> 
+							<option value="1.3">être assis(e)</option>
+							<option value="1.0">dormir ou méditer</option>
+						</optgroup>    
+						<optgroup reference="16" label="Pelouse et jardin :"> 
+							<option value="3.5">débroussailler, effort modéré</option>
+							<option value="6.3">débroussailler, effort vigoureux</option>
+							<option value="3.5">creuser, bêcher, composter, effort léger à modéré</option>
+							<option value="7.8">creuser, bêcher, composter, effort vigoureux</option>
+							<option value="2.0">planter, rempoter, transplanter des germes ou plantes, effort léger</option>
+							<option value="4.3">planter des cultures ou jardiner, effort modéré</option> 
+							<option value="5.5">tondre la pelouse</option>
+							<option value="4.0">ramasser de l'herbe, des feuilles pour les mettre dans un sac</option>
+							<option value="4.0">tailler des arbustes ou des arbres, outil de coupe manuel</option> 
+							<option value="3.5">tailler des arbustes ou des arbres, outil de coupe à moteur,</option> 
+							<option value="1.5">arroser la pelouse ou le jardin, debout ou en marchant</option> 
+							<option value="3.5">désherber, cultiver le jardin, effort léger à modéré</option> 
+							<option value="5.0">désherber, cultiver le jardin, effort modéré à vigoureux</option> 
+							<option value="3.8">jardiner, effort modéré</option> 
+							<option value="3.5">cueillir des fruits sur les arbres, ramasser des fruits/légumes, effort modéré</option> 
+							<option value="4.5">cueillir/ramasser des fruits/légumes, monter une échelle pour cueillir des fruits, effort vigoureux</option> 
+						</optgroup>    
+						<optgroup reference="17" label="Divers:">    
+							<option value="1.5">jouer à des jeux de société, en position assise</option> 
+							<option value="1.8">dessiner, écrire et peindre en étant debout</option> 
+							<option value="1.3">Lire, écrire, faire du travail de bureau en position assise</option> 
+							<option value="1.8">parler, lire, téléphoner ou envoyer des messages en étant debout </option> 
+							<option value="1.5">parler, lire, téléphoner ou envoyer des messages en étant assis</option> 	
+						</optgroup>    
+						<optgroup reference="18" label="Activités artistiques (peinture, sculpture, tissage...) :"> 
+							<option value="1.8">en position assise, effort léger</option> 
+							<option value="3.0">en position assise, effort modéré</option> 
+							<option value="2.5">en position debout, effort léger</option> 
+							<option value="3.3">en position debout, effort modéré</option> 
+						</optgroup>
+						<optgroup reference="19" label="Jouer un instrument de musique :"> 
+							<option value="2.3">violoncelle, en position assise</option> 
+							<option value="3.8">diriger un orchestre</option> 
+							<option value="3.8">batterie, assis</option> 
+							<option value="2.0">flûte avec effort modéré, guitare ou orgue en position assise</option>
+							<option value="3.5">trombone, debout</option>
+							<option value="2.5">violon en position assise</option>
+							<option value="1.8">trompette, debout</option>
+							<option value="3.0">guitare, debout</option>
+							<option value="5.5">dans une fanfare en marchant à un rythme soutenu</option>
+						</optgroup>
+						<optgroup reference="20" label="Activités réalisées dans le cadre du travail :">
+							<option value="4.0">boulangerie,femme de chambre, concierge d'hôtel</option>
+							<option value="6.0">construction de routes, conduite de machines lourdes</option>
+							<option value="8.0">port de charges lourdes</option>
+							<option value="6.0">chef cuisine</option>
+							<option value="7.8">agriculture, effort vigoureux (ex. fabrication de bottes de foin, nettoyage d'une grange)</option>
+							<option value="4.8">agriculture, effort modéré (ex. nourrir des animaux, regrouper du bétail à pied et/ou cheval, épandre du fumier, récolter des cultures)</option>
+							<option value="2.0">agriculture, effort léger (par ex. nettoyer des déjections animales, préparer de la nourriture pour animaux</option>
+							<option value="4.5">agriculture, s'occuper des animaux</option>
+							<option value="1.8">coiffeur</option>
+							<option value="4.0">jardinier</option>
+							<option value="3.0">serrurier</option>
+							<option value="2.8">travail manuel ou non qualififié, effort léger</option>
+							<option value="4.5">travail manuel ou non qualifié, effort modéré</option>
+							<option value="6.5">travail manuel ou non qualifié, effort vigoureux</option>
+							<option value="4.3">maçonnerie, béton, effort modéré</option>
+							<option value="2.5">maçonnerie, béton, effort léger</option>
+							<option value="3.0">activités de plomberie</option>
+							<option value="2.5">police, faire la circulation, debout</option>
+							<option value="2.3">postier, marcher pour livrer le courrier, travail léger (discussion, remplissage, assemblage)</option>
+							<option value="2.0">cordonnerie, conduite d'un camion, taxi, bus navette ou scolaire</option>
+							<option value="1.5">travail (au bureau)en position assise</option>
+							<option value="3.0">debout, effort léger/modéré (ex. barman, soins infirmiers, employé de magasin, assemblage, remplissage, reproduction, bibliothécaire</option>
+						</optgroup>
+						<optgroup reference="21" label="Course :">
+							<option value="6.0">courir à 6,5 km/h</option>
+							<option value="8.3">courir à 8 km/h</option>
+							<option value="9.0">courir à 8,4 km/h</option>
+							<option value="9.8">courir à 9,6 km/h</option>
+							<option value="10.5">courir à 10.8 km/h (5,5 min/km)</option>
+							<option value="15.0">courir en montant les escaliers</option>
+							<option value="13.3">marathon</option>
+						</optgroup>
+						<optgroup reference="22" label="Sports :">
+							<option value="3.0">bowling, frisbee</option>
+							<option value="5.5">boxe, taper dans un sac de frappe</option>
+							<option value="5.8">jeux d’enfants, jeux d’adultes (ex. ballon, équipement de cours de récréation, t-ball, billes...), effort modéré</option>
+							<option value="4.0">entraînement, football américain, basketball, baseball, natation, etc</option>
+							<option value="2.5">fléchettes sur mur ou gazon</option>
+							<option value="6.0">escrime</option>
+							<option value="4.8">golf</option>
+							<option value="3.8">gymnastique, général</option>
+							<option value="12.0">handball,</option>
+							<option value="5.0">skate, effort modéré</option>
+							<option value="4.0">accrobranches, athlétisme (par ex. lancer de poids, lancer de disque, lancer de marteau°</option>
+							<option value="7.3">squash, tennis</option>
+							<option value="7.0">football, loisirs</option>
+							<option value="4.0">tennis de table, ping-pong</option>
+							<option value="3.0">tai chi, qi gong</option>
+							<option value="6.0">tennis double, athlétisme (ex. saut en hauteur, saut en longueur, triple saut, lancer de javelot...)</option>
+							<option value="3.5">trampoline, récréatif</option>
+							
+						</optgroup>
+						<optgroup reference="23" label="Equitation :">
+							<option value="5.8">trot</option>
+							<option value="7.3">petit ou grand galop</option>
+							<option value="3.8">pas</option>
+							<option value="9.0">saut d’obstacles</option>
+						</optgroup>
+						<optgroup reference="24" label="Escalade :">
+							<option value="7.5">escalade, varappe, difficile</option>
+							<option value="5.8">escalade, varappe, difficulté faible à modérée</option>
+							<option value="5.0">escalade, descente en rappel</option>
+						</optgroup>
+						<optgroup reference="25" label="Corde à sauter :">
+							<option value="12.3">rythme rapide, 120-160 sauts/min</option>
+							<option value="11.8">rythme modéré, 100-120 sauts/min</option>
+							<option value="8.8">rythme lent, inférieur à 120-160 sauts/min</option>
+						</optgroup>
+						</optgroup>
+						<optgroup reference="26" label="Roller, patin :">
+							<option value="7.5">14,4 km/h, rythme loisir</option>
+							<option value="9.8">17,7 km/h, rythme modéré</option>
+							<option value="12.3">21 à 21,7 km/h, rythme rapide</option>
+						</optgroup>
+						<optgroup reference="27" label="Transport :">
+							<option value="1.3">déplacement en voiture ou en camion (bus, train...)</option>
+							<option value="2.5">conduire une voiture ou un camion léger</option>
+						</optgroup>
+						<optgroup reference="28" label="Marche (loisir, pour se déplacer...) :">
+							<option value="3.5">marcher à 4,5-5 km/h, sur le plat, rythme modéré, sol ferme ou descendre les escaliers</option>
+							<option value="7.8">randonnée ou marche organisée avec un sac à dos</option>
+							<option value="5.0">porter une charge de 7 kg (par ex. valise), à plat ou en descendant des escaliers</option>
+							<option value="5.0">porter une charge de 0.5-7 kg en montant des escaliers</option>
+							<option value="10.0">porter une charge de  22-33kg en montant en descendant des escaliers</option>
+							<option value="8.0">porter une charge de 11-22kg en montant des escaliers</option>
+							<option value="4.0">pousser ou tirer une poussette avec un enfant ou marcher avec des enfants, 4 à 5 km/h</option>
+							<option value="3.8">pousser un fauteuil roulant</option>
+							<option value="4.0">monter des escaliers, rythme lent</option>
+							<option value="3.0">marcher à 4 km/h, à plat, sol ferme</option>
+							<option value="8.8">monter des escaliers, rythme rapide</option>
+							<option value="3.3">marcher à 4 km/h, en descente</option>
+							<option value="4.3">marcher à 4,5-5 km/h, à plat, rythme modéré, sol ferme</option>
+							<option value="5.3">marcher à 4,5-5,5 km/h, en montée de 1 à 5 %</option>
+							<option value="8.0">marcher à 4,5-5,5 km/h, en montée de 6-15 %</option>
+							<option value="5.0">marcher à 6,5 km/h, à plat, sol ferme, rythme très rapide</option>
+							<option value="7.0">marcher à 7 km/h, à plat, sol ferme, rythme extrêmement rapide</option>
+							<option value="8.3">marcher à 8 km/h, à plat, sol ferme</option>
+							<option value="9.8">marcher à 8 km/h, en montée de 3 %</option>
+							<option value="4.5">marcher pour le plaisir, pause de travail</option>
+							<option value="4.0">marcher à un rythme normal, ou dans du sable</option>
+							<option value="4.8">marche nordique, à plat, rythme modéré</option>
+							<option value="9.5">marche nordique, à plat, rythme rapide</option>
+							<option value="6.8">marche nordique, en montée</option>
+
+						<optgroup reference="29" label="Faire une randonnée :">
+							<option value="6.3">en collines, sans charge</option>
+							<option value="6.5">en collines en portant une charge de 0 à 4 kg</option>
+							<option value="7.3">en collines en portant une charge de 4.5 à 9kg</option>
+							<option value="5.3">à allure normale à travers champs et versants de colline</option>
+						</optgroup>
+						<optgroup reference="30" label="Activités nautiques et aquatiques :">
+							<option value="2.8">canoë, pagayer à 3,2-4,8 km/h, effort léger</option>
+							<option value="5.8">canoë, pagayer à 6,4-8 km/h, effort modéré</option>
+							<option value="3.0">voile, voilier et planche à voile, windsurf, voile sur glace,</option>
+							<option value="6.0">ski nautique</option>
+							<option value="7.0">plongée sous-marine, général</option>
+							<option value="10.0">water polo</option>
+							<option value="3.0">surf, corps ou planche, water volley-ball </option>
+							<option value="9.8">water jogging</option>
+							<option value="2.5">marcher dans l’eau, effort léger, rythme lent</option>
+							<option value="4.5">marcher dans l’eau, effort modéré, rythme modéré</option>
+							<option value="6.8">marcher dans l’eau, effort vigoureux, rythme soutenu</option>
+							<option value="5.0">rafting, kayak, canoë en eau vive, planche à voile, sans pomper pour gagner en vitesse</option>
+							<option value="13.5">planche à voile, compétition, en pompant pour gagner en vitesse</option>
+							
+						</optgroup>
+						<optgroup reference="31" label="Natation :">
+						<option value="8.0">natation, synchronisée</option>
+							<option value="9.8">natation, crawl, rythme rapide (~70 mètres/minute), effort très vigoureux</option>
+							<option value="8.3">natation, crawl, rythme rapide (~45 mètres/minute), effort vigoureux</option>
+							<option value="13.8">natation, papillon,</option>
+							<option value="5.3">natation, brasse, loisirs</option>
+							<option value="10.3">natation, brasse, entraînement/compétition</option>
+							<option value="4.8">natation, nage sur le dos, loisirs</option>
+							<option value="9.5">natation, nage sur le dos, général, entraînement</option>
+							<option value="5.8">longueurs de piscine, nage libre, crawl, rythme lent, effort modéré ou léger</option>
+							<option value="9.8">longueurs de piscine, nage libre, rythme rapide, effort vigoureux</option>
+							
+						</optgroup>
+						<optgroup reference="32" label="Activités hivernales :">
+						<option value="2.5">randonnée en traîneau à chiens en tant que passager</option>
+							<option value="4.5">marcher dans l’eau, effort modéré, rythme modéré</option>
+							<option value="6.8">marcher dans l’eau, effort vigoureux, rythme soutenu</option>
+							<option value="5.0">rafting, kayak, canoë en eau vive</option>
+							<option value="14.0">dance sur glace</option>
+							<option value="5.5">patinage sur glace, à 14,5 km/h ou moins</option>
+							<option value="6.8">ski de fond à 4 km/h, rythme lent ou effort léger, marche nordique</option>
+							<option value="9.0">ski de fond à 6,5-8 km/h, rythme et effort modérés</option>
+							<option value="12.5">ski de fond à 8-12,5 km/h, rythme rapide</option>
+							<option value="7.0">bobsleigh, luge</option>
+							<option value="5.3">raquettes à neige, effort modéré</option>
+							<option value="10.0">raquettes à neige, effort vigoureux</option>
+							<option value="5.3">déblayer la neige à la pelle, à la main, effort modéré</option>
+							<option value="7.5">déblayer la neige à la pelle, à la main, effort vigoureux</option>
+						</optgroup>
+						
+					</select> 
+				</div>
+			</div>
+			<!-- reste -->
+			<div class="mt-5">
+				<div class="row">
+					<div name = "formulaire_poids" class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+						<p class="gras"> <img class = "picto" src="img/balance.png" alt = "balance"/>Masse corporelle (en kg) </p>
+						<input type="text" id="poids" class="contour gray form-control" placeholder="ex : 50 si vous pesez 50 kilogrammes"required onchange="getpoids(this.value)">
+					</div>
+					<div name = "formulaire_duree" class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6"> 
+						<p class="gras"><img class = "picto" src="img/sablier.png" alt = "sablier"/> Durée de pratique (en min)</p>
+						<input type="text" id="duree"  class="contour gray form-control" placeholder="ex : 10 si vous pratiquez 10 minutes" required onchange="getduree(this.value)">
+					</div>
+				</div> 
+			</div>			
+		</div>
+		<div class="fond1 pt-5 pb-2">	
+		<!--Zone 3: validation et obtention de résultats -->
+			<p class = "small text-center"><em>Assurez vous de bien renseigner tous les champs, afin d'obtenir la valeur la plus exacte possible, ou réinitialisez pour reprendre votre saisie.</em></p>
+			<div class = "d-flex justify-content-center mt-4 mb-4">
+				<button  class = "btn m-2 gras valider" name="validation" onclick="depense()"> VALIDER </button>
+				<button  class = "btn m-2 gras rafraichir" onclick="reload()" id = "fresh">RÉINITIALISER</button>
+			</div> 
+		</div>
+		<div class="text-center fs-6 mt-5">©Vivoptim-solutions-2022</div>
+	</div>
+<script src="calcul.js"></script>
+<script>
+/* 
+  * trigger="true" permet de dire que c'est l'élément le plus haut qui fait varier toutes les autres listes 
+  * target=[id_cible] permet de spécifier la liste qui doit varier au changement de la sélection 
+  * reference=[id_reference] est l'id de l'élément parent qui déclenche la mise à jour de la liste 
+*/ 
+  
+//Fonction qui s'occupe de la mise à jour des listes 
+function updateSelectBox(object){ 
+    // Object correspond au input qui déclenche l'action (pays dans notre cas) 
+    // On récupère le select (département) qui doit être mise à jour suite au changement du parent (pays) 
+    var target = $("#"+object.attr('target')); 
+  
+    // On récupère tous les optgroup du select cible spécifié avec target (les optgroup du select département) 
+    var listGroups = target.find("optgroup"); 
+  
+    // On récupère le optgroup qui correspond à la valeur courante du select parent (pays) 
+    var validGroup = target.find("optgroup[reference='"+object.find(':selected').val()+"']"); 
+  
+    //On modifie la valeur courante du select cible (département) 
+    target.val(validGroup.find("option").val()); 
+  
+    //On cache tous les optgroup de département 
+    listGroups.hide(); 
+  
+    //On affiche uniquement le optgroup de département qui correspond à la valeur courante de pays 
+    validGroup.show(); 
+  
+    //On vérifie si la cible (département) doit déclencher une mise à jour d'une autre liste 
+    // Département peut par exemple déclencher la mise à jour des villes, et les villes déclenches celle des quartiers... 
+    if(target.attr('content-type')=='choices') 
+        target.change(); 
+} 
+  
+//On associe la fonction updateSelectBox à l'événement onchange des listes qui doivent déclencher des mises à jour d'autres listes 
+$("select[content-type='choices']").on('change',function(){ 
+    updateSelectBox($(this)); 
+}); 
+  
+//On fait la première mise à jour des 
+$(document).ready(function(){ 
+    updateSelectBox($("select[trigger='true']")); 
+});
+
+</script>
+</body>
+</html>
